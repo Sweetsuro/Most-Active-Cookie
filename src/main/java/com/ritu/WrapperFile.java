@@ -22,9 +22,11 @@ public class WrapperFile {
 
 	public boolean isValid() {
 		// does the fileName have CSV token
-		if (!this.getFileExt().equals(".csv")) return false;
+		if (this.fName == null || !this.getFileExt().equals(".csv")) 
+			return false;
 		// is date given valid
-		if (!this.validateDate(this.date)) return false;
+		if (this.date == null || !this.validateDate(this.date)) 
+			return false;
 		return true;
 	}
 
@@ -34,6 +36,7 @@ public class WrapperFile {
 	}
 
 	public boolean validateDate(String value) {
+		if (value == null) return false;
 		LocalDate ld = null;
 		DateTimeFormatter fomatter = DateTimeFormatter.ISO_LOCAL_DATE;
 		try {
