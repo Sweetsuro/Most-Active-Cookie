@@ -1,0 +1,3 @@
+# !/bin/sh
+
+java -jar most_active_cookie.jar "$@"
