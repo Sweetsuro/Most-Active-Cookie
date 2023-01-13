@@ -47,5 +47,5 @@ Follow the format of the command outlined before:
 $ ./most_active_cookie cookie_log.csv -d 2018-12-09
 ~~~
 
-The file must be a .csv file (have a .csv extension label). A date (in proper format) should be provided for 
-meaningful computation. JUnit test cases are provided within the repo.
+The file must be a .csv file (have a .csv extension label). A sample cookie_log.csv file is provided within the repo.
+A date (in proper format) should be provided for meaningful computation. JUnit test cases are provided within the repo.
