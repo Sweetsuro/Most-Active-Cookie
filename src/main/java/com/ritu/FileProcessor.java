@@ -1,16 +1,23 @@
 package com.ritu;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileProcessor {
 	private WrapperFile wf;
 	private HashMap<String, Integer> cookieCounts;
+	private ArrayList<String> maxCookieNames;
 	
 	FileProcessor(WrapperFile wf) {
 		this.wf = wf;
 		this.cookieCounts = new HashMap<>();
+		this.maxCookieNames = new ArrayList<>();
+	}
+
+	public ArrayList<String> getMaxCookieNames() {
+		return this.maxCookieNames;
 	}
 
 	private boolean validateContent(String[] toks, String cDate) {
@@ -20,6 +27,7 @@ public class FileProcessor {
 	}
 
 	public void processFile() {
+		if (!wf.isValid()) return;
 		try {
 			Scanner sc = new Scanner(new File(wf.getFName()));
 			while (sc.hasNext()) {
@@ -33,7 +41,7 @@ public class FileProcessor {
 				
 				if (!validateContent(toks, cDate)) {
 					System.err.println("File content is invalid.");
-        			System.exit(1);
+        			return;
 				}
 
 				// adds token to HashMap if present
@@ -47,13 +55,13 @@ public class FileProcessor {
 			sc.close();  
 		} catch (FileNotFoundException e) {
 			System.err.println("Invalid file path");
-			System.exit(1);
+			return;
 		}
 
 		// have HashMap of counts
 		if (cookieCounts.size() < 1) {
 			System.err.println("Date not found in log");
-			System.exit(1);
+			return;
 		}
 
 		// find highest token frequency
@@ -64,9 +72,12 @@ public class FileProcessor {
 		}
 
 		// print tokens with highest frequency
+		// add tokens to array list for testing
 		for (String key : cookieCounts.keySet()) {
-			if (cookieCounts.get(key) == maxCookieCount)
+			if (cookieCounts.get(key) == maxCookieCount) {
 				System.out.println(key);
+				maxCookieNames.add(key);
+			}
 		}
 	}
 }

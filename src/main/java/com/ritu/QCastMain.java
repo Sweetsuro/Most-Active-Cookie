@@ -4,14 +4,19 @@ public class QCastMain {
 
 	public static void commandLineError() {
 		System.err.println("usage: ./QCastMain <fileName.csv> [-d] <arg>");
-        System.exit(1);
 	}
 
 	public static void main(String[] args) {
 		// comand line parsing
-		if (args.length < 1) commandLineError();
+		if (args.length < 1) {
+			commandLineError();
+			return;
+		}
 		// check if valid # of args
-		if (args.length%2 == 0) commandLineError();
+		if (args.length%2 == 0) {
+			commandLineError();
+			return;
+		}
 
 		// get file name
 		String fName = args[0];
@@ -22,6 +27,7 @@ public class QCastMain {
 
 		if (args.length == 1) {
 			System.out.println("File " + fName + " recieved.");
+			return;
 		} else {
 			// parse rest of args
 			for (int i = 1; i < args.length; i+=2) {
@@ -33,6 +39,7 @@ public class QCastMain {
 						break;
 					default: 
 						commandLineError();
+						return;
 				}
 			}
 
@@ -41,7 +48,7 @@ public class QCastMain {
 				 file = new WrapperFile(fName, date);
 				 if (!file.isValid()) {
 					System.err.println("File and/or date given is invalid.");
-        			System.exit(1);
+        			return;
 				 }
 				 FileProcessor fp = new FileProcessor(file);
 				 fp.processFile();
