@@ -3,7 +3,7 @@ package com.ritu;
 public class QCastMain {
 
 	public static void commandLineError() {
-		System.err.println("usage: ./QCastMain <fileName.csv> [-d] <arg>");
+		System.err.println("usage: ./most_active_cookie <fileName.csv> [-d] <arg>");
 	}
 
 	public static void main(String[] args) {
